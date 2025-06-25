@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="spaceship fighter"
-run/main_scene="res://scenes/world.tscn"
+run/main_scene="res://scenes/game.tscn"
 
 [autoload]
 
