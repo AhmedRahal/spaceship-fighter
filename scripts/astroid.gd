@@ -36,19 +36,25 @@ func spawn():
 			farthest_corner = corner
 
 	direction = (farthest_corner - global_position).normalized()
-
-
+	
 	# Set direction toward that corner
+	
 	direction = (farthest_corner - position).normalized()
+	get_parent()
 func _physics_process(delta):
 	#moving logic
 	position += direction * speed * delta
-
-
-func _on_Area2D_area_entered(area):
-	if area and  true :
+#func _on_Area2D_area_entered(area):
+func dead(area):
+	print(area)
+	if area :
+		if  area.get("type") == "Bullet":
+			area.queue_free()
+		if  area.get("type") == "Player":
+			area.die()
 		var explosion_instance = explosion.instance()
 		explosion_instance.position = position
 		get_tree().current_scene.add_child(explosion_instance)
-		print(get_tree().current_scene.get_child_count())
 		queue_free()
+func _on_Area2D_body_entered(area):
+	dead(area)

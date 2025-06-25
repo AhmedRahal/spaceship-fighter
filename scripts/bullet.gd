@@ -1,6 +1,6 @@
 extends Area2D
-
-
+class_name Bullet
+var type = "Bullet"
 var speed:float = 1200
 var direction:Vector2 = Vector2.ZERO
 

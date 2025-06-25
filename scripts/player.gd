@@ -1,7 +1,9 @@
 extends KinematicBody2D
-
-export var speed: float = 100.0
+class_name Player
+var type = "Player"
+export var speed: float = 300.00
 var bulletScene = null
+var explosion = preload("res://scenes/explosion.tscn")
 var shooting_cd:float = -0.0
 func _ready():
 	bulletScene = preload("res://scenes/bullet.tscn")
@@ -33,6 +35,24 @@ func shoot(delta):
 func get_screen_borders() :
 	pass
 
+func die():
+	visible = false
+	var explosion_instance = explosion.instance()
+	explosion_instance.position = position
+	get_tree().current_scene.add_child(explosion_instance)
+	
+	var timer = Timer.new()
+	timer.wait_time = 1
+	timer.one_shot = true
+	get_tree().current_scene.add_child(timer)
+
+	timer.connect("timeout", self, "_on_timer_timeout")
+	timer.start()
+
+func _on_timer_timeout():
+	print("Timer ended")
+	get_tree().paused = true
+	queue_free()
 
 
 

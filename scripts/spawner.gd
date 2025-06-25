@@ -13,7 +13,7 @@ func _ready():
 func _on_Timer_timeout():
 	astroid_spawned += 1
 	spawn_handler()
-
+	kill_all_asteroids()
 func spawn_handler():
 	for i in range(times):
 		spawn()
