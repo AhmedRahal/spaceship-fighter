@@ -44,7 +44,8 @@ func spawn():
 func _physics_process(delta):
 	#moving logic
 	position += direction * speed * delta
-#func _on_Area2D_area_entered(area):
+func _on_Area2D_area_entered(area):
+	dead(area)
 func dead(area):
 	print(area)
 	if area :
@@ -53,8 +54,9 @@ func dead(area):
 		if  area.get("type") == "Player":
 			area.die()
 		var explosion_instance = explosion.instance()
-		explosion_instance.position = position
+		explosion_instance.get_child(0).position = position
 		get_tree().current_scene.add_child(explosion_instance)
 		queue_free()
 func _on_Area2D_body_entered(area):
 	dead(area)
+

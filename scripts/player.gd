@@ -38,21 +38,23 @@ func get_screen_borders() :
 func die():
 	visible = false
 	var explosion_instance = explosion.instance()
-	explosion_instance.position = position
+	explosion_instance.get_child(0).position = position
+	explosion_instance.add_to_group("expl")
 	get_tree().current_scene.add_child(explosion_instance)
 	
 	var timer = Timer.new()
-	timer.wait_time = 1
+	timer.wait_time = 2
 	timer.one_shot = true
 	get_tree().current_scene.add_child(timer)
-
 	timer.connect("timeout", self, "_on_timer_timeout")
 	timer.start()
+	
 
 func _on_timer_timeout():
 	print("Timer ended")
-	get_tree().paused = true
+	get_tree().call_group("expl","_on_AnimatedSprite_animation_finished")
 	queue_free()
+	get_tree().paused = true
 
 
 

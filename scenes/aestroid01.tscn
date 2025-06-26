@@ -14,4 +14,5 @@ position = Vector2( -216.825, 48 )
 scale = Vector2( 18.3679, 3.9375 )
 polygon = PoolVector2Array( 11.1642, -13.7143, 11.3146, -9.39683, 12.2946, -9.14286, 12.4776, -14.2222 )
 
+[connection signal="area_entered" from="." to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
